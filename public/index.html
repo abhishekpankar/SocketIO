@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    const socket0 = io('http://localhost:3000/test');
+    socket0.on('connect', () => {
+        console.log('Connected', socket0.id);
+        socket0.emit('join', { room: 'room0', name: 'name0' });
+    })
+
+    socket0.on('message', (data) => {
+        console.log(data);
+    })
+
+    const socket1 = io('http://localhost:3000/test');
+    socket1.on('connect', () => {
+        console.log('Connected', socket1.id);
+        socket1.emit('join', { room: 'room1', name: 'name1' });
+    })
+
+    socket1.on('message', (data) => {
+        console.log(data);
+    })
+    
+    setTimeout(() => {
+        socket1.disconnect()
+    }, 10000);
+</script>
+</html>
