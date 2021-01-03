@@ -26,7 +26,12 @@ var server = http.createServer(app);
  * Create Socket.io Connection.
  */
 
-var io = socket(server);
+var io = socket(server, {
+  cors: {
+    origin: "*",
+    methods: "*"
+  }
+});
 require('../socket')(io);
 
 /**
